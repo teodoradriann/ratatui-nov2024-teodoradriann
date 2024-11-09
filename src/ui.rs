@@ -1,13 +1,11 @@
-use std::os::macos::raw::stat;
-
 use ratatui::style::{Color, Modifier, Style, Stylize};
 use ratatui::text::{Line, Span, Text};
 use ratatui::widgets::{Block, Borders, List, Paragraph, ListState};
-use ratatui::widgets::block::Position;
+//use ratatui::widgets::block::Position;
 use ratatui::layout::{Constraint, Direction, Layout};
 use ratatui::widgets::ListItem;
 use ratatui::Frame;
-use reqwest::tls::TlsInfo;
+//use reqwest::tls::TlsInfo;
 use crate::app::App;
 use crate::app::InputMode;
 
@@ -65,10 +63,10 @@ pub fn render(app: &mut App, frame: &mut Frame) {
     match app.input_mode {
         InputMode::Normal => {}
         #[allow(clippy::cast_possible_truncation)]
-        InputMode::Editing => frame.set_cursor(
+        InputMode::Editing => frame.set_cursor_position((
             input_area.x + app.character_index as u16 + 1,
             input_area.y + 1,
-        ),
+        )),
     }
 
     let cities_text = Span::styled("Cities Searched", 

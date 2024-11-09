@@ -1,5 +1,5 @@
-use std::{error, ops::{Index, SubAssign}, str};
-/// Application result type.
+use std::error;
+
 pub type AppResult<T> = Result<T, Box<dyn error::Error>>;
 
 /// Application.

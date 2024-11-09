@@ -1,11 +1,11 @@
 use crossterm::event;
-use ratatui::text::ToText;
+//use ratatui::text::ToText;
 use ratatui_templates::app::{App, AppResult};
-use ratatui_templates::connection::{get_city_name, get_weather_forecast};
-use ratatui_templates::event::{Event, EventHandler};
+//use ratatui_templates::connection::{get_city_name, get_weather_forecast};
+use ratatui_templates::event::EventHandler;
 use ratatui_templates::handler::handle_key_events;
 use ratatui_templates::tui::Tui;
-use core::time;
+//use core::time;
 use std::io;
 use std::time::Duration;
 use ratatui::backend::CrosstermBackend;
