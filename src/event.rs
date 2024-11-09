@@ -6,7 +6,6 @@ use tokio::sync::mpsc;
 
 use crate::app::AppResult;
 
-/// Terminal events.
 #[derive(Clone, Copy, Debug)]
 pub enum Event {
     /// Terminal tick.
@@ -36,12 +35,12 @@ impl EventHandler {
     pub fn new(tick_rate: u64) -> Self {
         let tick_rate = Duration::from_millis(tick_rate);
 
-        /// Creating a communcation channel between the application and a thread that
-        /// listens for keyboard/mouse events coming from the user
+        // Creating a communcation channel between the application and a thread that
+        // listens for keyboard/mouse events coming from the user
         let (sender, receiver) = mpsc::unbounded_channel();
         let _sender = sender.clone();
 
-        /// Spawning the handler thread that will run in background, should be joined at quit
+        // Spawning the handler thread that will run in background, should be joined at quit
         let handler = tokio::spawn(async move {
             // Events reader stream
             let mut reader = crossterm::event::EventStream::new();
@@ -50,7 +49,7 @@ impl EventHandler {
                 let tick_delay = tick.tick();
                 let crossterm_event = reader.next().fuse();
 
-                /// Concurrent execution branches, first event to finish is returned
+                // Concurrent execution branches, first event to finish is returned
                 tokio::select! {
                   _ = tick_delay => {
                     _sender.send(Event::Tick).unwrap();
@@ -70,10 +69,8 @@ impl EventHandler {
         }
     }
 
-    /// Receive the next event from the handler thread.
-    ///
-    /// This function will always block the current thread if
-    /// there is no data available and it's possible for more data to be sent.
+    
+    
     pub async fn next(&mut self) -> AppResult<Event> {
         self.receiver
             .recv()
